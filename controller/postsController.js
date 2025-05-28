@@ -47,7 +47,12 @@ function modify(req, res) {
 
 function destroy(req, res) {
 
-    res.sendStatus('Eliminazione di un post');
+    const { id } = req.params;
+
+    connection.query('DELETE FROM posts WHERE id = ?', [id], (err) => {
+        if (err) return res.status(500).json({ error: 'failed to delete post' });
+        res.sendStatus(204)
+    })
 
 }
 
