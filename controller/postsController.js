@@ -15,6 +15,11 @@ function index(req, res) {
 }
 
 function show(req, res) {
+
+    const id = req.params.id;
+
+    const sql = `SELECT * FROM posts WHERE id = ?`;
+
     res.json('Dettaglio di un post');
 }
 
