@@ -1,4 +1,4 @@
-const post = require('../data/postsList');
+const connection = require('../data/db.js')
 
 function index(req, res) {
 
