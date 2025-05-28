@@ -2,59 +2,31 @@ const connection = require('../data/db.js')
 
 function index(req, res) {
 
-    // callmyfunction();
+    const sql = 'SELECT * FROM posts';
 
-    res.json(post);
+    connection.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database query failed' });
+        }
+        console.log(results);
+        res.json(results);
+    });
+
 }
 
 function show(req, res) {
-    const id = parseInt(req.params.id);
-    const postFound = post.find(post => post.id === id);
-    res.json(postFound);
+    res.json('Dettaglio di un post');
 }
 
 function store(req, res) {
-    const newId = post[post.length - 1].id + 1;
 
-    const newPost = {
-        id: newId,
-        title: req.body.title,
-        content: req.body.content,
-        image: req.body.image,
-        tags: req.body.tags
-    }
-
-    post.push(newPost);
-
-
-
-    res.status(201);
-    res.json(newPost);
-
-
-
-
+    res.json('Aggiunta di un post');
 }
 
 function update(req, res) {
-    const id = parseInt(req.params.id);
-    const findPost = post.find(post => post.id === id);
 
-    if (!post) {
-        res.status(404);
 
-        return res.json({
-            error: 'Not FOund',
-            message: 'Post non trovato'
-        })
-    }
-
-    findPost.title = req.body.title;
-    findPost.content = req.body.content;
-    findPost.image = req.body.image;
-    findPost.tags = req.body.tags;
-
-    res.json(findPost);
+    res.json('ricerca di un post');
 
 }
 
@@ -63,12 +35,8 @@ function modify(req, res) {
 }
 
 function destroy(req, res) {
-    const id = parseInt(req.params.id);
-    const postFound = post.find(post => post.id === id);
-    post.splice(post.indexOf(postFound), 1);
-    console.log(post);
 
-    res.sendStatus(204);
+    res.sendStatus('Eliminazione di un post');
 
 }
 
