@@ -20,7 +20,13 @@ function show(req, res) {
 
     const sql = `SELECT * FROM posts WHERE id = ?`;
 
-    res.json('Dettaglio di un post');
+    connection.query(sql, [id], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: "database query failed: " + err });
+        }
+
+        res.json(results);
+    })
 }
 
 function store(req, res) {
